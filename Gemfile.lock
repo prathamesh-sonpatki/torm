@@ -1,0 +1,10 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    arel (5.0.1.20140414130214)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  arel
