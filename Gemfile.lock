@@ -2,9 +2,11 @@ GEM
   remote: https://rubygems.org/
   specs:
     arel (5.0.1.20140414130214)
+    pg (0.17.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   arel
+  pg
