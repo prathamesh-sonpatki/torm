@@ -1,5 +1,3 @@
-require 'torm'
-
 class Model
 
   def self.create(params = {})
@@ -12,5 +10,9 @@ class Model
   end
 
   def self.find(params)
+  end
+
+  def self.table
+    Arel::Table.new(self.name.downcase + 's', Torm::Engine.new)
   end
 end

@@ -1,2 +1,0 @@
-class Engine
-end
