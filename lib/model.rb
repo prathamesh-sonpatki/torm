@@ -20,8 +20,8 @@ module Torm
     def self.where(options)
       k, v   = options.shift
       clause = table[k].eq v
-      options.each do |k, v|
-        clause = clause.and(table[k].eq(v))
+      options.each do |field, value|
+        clause = clause.and(table[field].eq(value))
       end
       table.where(clause)
     end
