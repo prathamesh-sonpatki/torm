@@ -2,11 +2,15 @@ GEM
   remote: https://rubygems.org/
   specs:
     arel (5.0.1.20140414130214)
+    minitest (5.4.0)
     pg (0.17.1)
+    rake (10.3.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   arel
+  minitest
   pg
+  rake
