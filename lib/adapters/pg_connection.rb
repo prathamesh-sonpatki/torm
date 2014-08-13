@@ -40,6 +40,26 @@ module Torm
                  AND a.attnum > 0 AND NOT a.attisdropped
                ORDER BY a.attnum))
       end
+
+      def type_map
+        @type_map ||= Type::TypeMap.new.tap do |mapping|
+          initialize_type_map(mapping)
+        end
+      end
+
+      def lookup_cast_type(sql_type) # :nodoc:
+        type_map.lookup(sql_type)
+      end
+
+      def initialize_type_map  mapping
+        register_type_class mapping, %r(string)i, Type::String
+        register_type_class mapping, %r(int)i, Type::Integer
+      end
+
+      def register_type_class(mapping, key, klass)
+        mapping.register_type(key, klass.new)
+      end
+
     end
   end
 end
