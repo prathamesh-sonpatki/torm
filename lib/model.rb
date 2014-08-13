@@ -25,5 +25,15 @@ module Torm
       end
       table.where(clause)
     end
+
+    def self.count
+      table.count
+    end
+
+    def self.delete_all
+      dm = Arel::DeleteManager.new table.engine
+      dm.from table
+      dm.to_sql
+    end
   end
 end
