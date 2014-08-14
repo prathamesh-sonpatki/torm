@@ -48,7 +48,7 @@ module Torm
         end
       end
 
-      def lookup_cast_type(sql_type) # :nodoc:
+      def lookup_cast_type(sql_type)
         type_map.lookup(sql_type)
       end
 

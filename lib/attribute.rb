@@ -52,7 +52,7 @@ module Torm
       end
     end
 
-    class Uninitialized < Attribute # :nodoc:
+    class Uninitialized < Attribute
       def initialize(name, type)
         super(name, nil, type)
       end
