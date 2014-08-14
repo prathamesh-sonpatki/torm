@@ -51,8 +51,8 @@ module Torm
         type_map.lookup(sql_type)
       end
 
-      def initialize_type_map  mapping
-        register_type_class mapping, %r(string)i, Type::String
+      def initialize_type_map mapping
+        register_type_class mapping, %r(char)i, Type::String
         register_type_class mapping, %r(int)i, Type::Integer
       end
 
