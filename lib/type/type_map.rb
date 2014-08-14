@@ -6,8 +6,12 @@ module Torm
       end
 
       def lookup(lookup_key)
-        if @mapping.key? lookup_key
-          @mapping[lookup_key]
+        matching_pair = @mapping.reverse_each.detect do |key, _|
+          key === lookup_key
+        end
+
+        if matching_pair
+          matching_pair.last
         else
           default_value
         end

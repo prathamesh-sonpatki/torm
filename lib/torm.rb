@@ -1,5 +1,9 @@
 require 'arel'
 require 'pg'
+require "./lib/type/value.rb"
+require "./lib/type/integer.rb"
+require  "./lib/type/string.rb"
+require "./lib/type/type_map.rb"
 require './lib/model'
 require './lib/engine'
 require './lib/base_connection'

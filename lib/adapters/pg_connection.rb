@@ -26,8 +26,9 @@ module Torm
       end
 
       def columns table
-        column_definitions(table).values.map do |column|
-          Torm::Column.new(column[0], column[1])
+        column_definitions(table).values.map do |column_name, type, default, notnull, oid, fmod|
+          cast_type = lookup_cast_type(type)
+          Torm::Column.new(column_name, type, cast_type)
         end
       end
 
