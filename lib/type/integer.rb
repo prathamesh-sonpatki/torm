@@ -16,6 +16,7 @@ module Torm
             value.to_i rescue nil
         end
       end
+
     end
   end
 end

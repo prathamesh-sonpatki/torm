@@ -8,6 +8,8 @@ module Torm
         value
       end
 
+      alias :type_cast :type_cast_for_database
+
     end
   end
 end
