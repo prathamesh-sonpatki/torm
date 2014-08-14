@@ -1,6 +1,6 @@
 module Torm
   module Type
-    class Integer < Value # :nodoc:
+    class Integer < Value
 
       def type
         :integer
