@@ -15,7 +15,6 @@ class Hash
     result
   end
 
-
   def except(*keys)
     dup.except!(*keys)
   end
@@ -26,7 +25,7 @@ class Hash
   end
 
   def stringify_keys
-    transform_keys{ |key| key.to_s }
+    transform_keys { |key| key.to_s }
   end
 
 end
