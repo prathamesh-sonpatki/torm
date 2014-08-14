@@ -61,6 +61,9 @@ module Torm
         mapping.register_type(key, klass.new)
       end
 
+      def exec_query sql
+        @connection.exec sql
+      end
     end
   end
 end

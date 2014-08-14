@@ -15,7 +15,7 @@ module Torm
 
     def test_initialize_allows_setting_attributes
       post = Post.new subject: "Lol Nom Rom"
-      assert_equal "Lol Nom Rom", post.name
+      assert_equal "Lol Nom Rom", post.subject
     end
 
     def test_save_creates_new_record

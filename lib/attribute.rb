@@ -11,9 +11,12 @@ module Torm
         FromUser.new(name, value, type)
       end
 
+      def uninitialized(name, type)
+        Uninitialized.new(name, type)
+      end
     end
 
-    def initialize(name, value_before_type_cast, type)
+    def initialize(name, value_before_type_cast, type = Type::Value.new)
       @name                   = name
       @value_before_type_cast = value_before_type_cast
       @type                   = type
@@ -49,6 +52,12 @@ module Torm
       end
     end
 
-    private_constant :FromDatabase, :FromUser
+    class Uninitialized < Attribute # :nodoc:
+      def initialize(name, type)
+        super(name, nil, type)
+      end
+    end
+
+    private_constant :FromDatabase, :FromUser, :Uninitialized
   end
 end

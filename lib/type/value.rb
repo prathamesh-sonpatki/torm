@@ -9,7 +9,7 @@ module Torm
       end
 
       alias :type_cast :type_cast_for_database
-
+      alias :type_cast_from_user :type_cast
     end
   end
 end

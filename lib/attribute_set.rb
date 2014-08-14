@@ -1,6 +1,12 @@
 module Torm
   class AttributeSet
 
+    class << self
+      def build_from_database(attributes)
+        AttributeSet.new(attributes)
+      end
+    end
+
     def initialize(attributes)
       @attributes = attributes
     end
@@ -9,14 +15,13 @@ module Torm
       attributes[name]
     end
 
+    def fetch_value(name, &block)
+      self[name].value(&block)
+    end
+
     def values_before_type_cast
       attributes.transform_values(&:value_before_type_cast)
     end
-
-    def to_hash
-      attributes.transform_values(&:value)
-    end
-    alias_method :to_h, :to_hash
 
     def key?(name)
       attributes.key?(name)
