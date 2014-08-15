@@ -5,10 +5,11 @@ module Torm
     include Torm::AttributeMethods::Write
     include Torm::AttributeMethods::Read
 
-    def initialize(attributes = nil)
+    def initialize(user_attributes = {})
       @attributes = self.default_attributes.dup
       init_attribute_methods
-      init_user_attributes(attributes)
+      init_user_attributes(user_attributes)
+      self
     end
 
     def self.create(params = {})
