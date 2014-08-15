@@ -29,10 +29,12 @@ module Torm
     def test_save_creates_new_record
       Post.delete_all
       post = Post.new subject: "Lol Nom Rom"
+      post.save
       assert_equal 1, Post.count
     end
 
     def test_delete_all_creates_sql
+      skip "Need to add and then remove records"
       assert_equal "DELETE FROM posts", Post.delete_all
     end
 
