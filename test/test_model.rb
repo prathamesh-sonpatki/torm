@@ -58,7 +58,7 @@ module Torm
       Post.delete_all
       post = Post.create subject: 'How RGenGC works?'
       post.reload
-      assert_equal 'How RGenGC works', post.subject
+      assert_equal 'How RGenGC works?', post.subject
       post.subject = 'How RincGC works?'
       post.save
       post.reload
