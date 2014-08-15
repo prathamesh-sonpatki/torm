@@ -3,6 +3,7 @@ module Torm
     include ModelSchema
     extend Querying
     extend DatabaseStatements
+    include DatabaseStatements
     include Torm::AttributeMethods::Write
     include Torm::AttributeMethods::Read
 
@@ -12,22 +13,6 @@ module Torm
       init_default_values
       init_user_attributes(user_attributes)
       self
-    end
-
-    def save(attributes = {})
-      if persisted?
-        update attributes
-      else
-        self.class.create attributes
-      end
-    end
-
-    def update(attributes = {})
-      um = Arel::UpdateManager.new self.class.table.engine
-      um.table self.class.table
-      um.set current_attribute_values(attributes)
-      self.class.connection.exec_query um.to_sql
-      self.class.find id
     end
 
     def reload
@@ -72,7 +57,11 @@ module Torm
     end
 
     def self.table
-      @_table ||= Arel::Table.new(self.name.downcase + 's', Torm::Engine.new)
+      @_table ||= Arel::Table.new(self.name.downcase + 's', model_engine)
+    end
+
+    def self.model_engine
+      @_model_engine ||= Torm::Engine.new
     end
 
     def self.table_name
@@ -80,7 +69,7 @@ module Torm
     end
 
     def self.connection
-      @_connection ||= self.table.engine.connection.connection
+      @_model_connection ||= model_engine.connection.connection
     end
   end
 end
