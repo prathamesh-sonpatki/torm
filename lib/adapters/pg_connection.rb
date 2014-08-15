@@ -61,6 +61,10 @@ module Torm
         mapping.register_type(key, klass.new)
       end
 
+      def last_inserted_id(sequence_name)
+        exec_query("SELECT currval('#{sequence_name}')").values.first.first
+      end
+
       def exec_query sql
         puts sql
         @connection.exec sql

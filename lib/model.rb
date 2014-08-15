@@ -13,21 +13,30 @@ module Torm
       self
     end
 
-    def self.update(params = {})
-    end
-
     def self.destroy(params)
     end
 
     def self.find(id)
-      where(id: id)
+      new(connection.exec_query(where(id: id).project('*').to_sql)[0])
     end
 
     def save(attributes = {})
       if persisted?
-        _update_record attributes
+        um = Arel::UpdateManager.new self.class.table.engine
+        um.table self.class.table
+        um.set current_attribute_values(attributes)
+        self.class.connection.exec_query um.to_sql
+        self.class.find id
       else
         self.class.create attributes
+      end
+    end
+
+    def reload
+      if persisted?
+        self.class.find id
+      else
+        nil
       end
     end
 
@@ -44,7 +53,7 @@ module Torm
     end
 
     def self.connection
-      self.table.engine.connection.connection
+      @_connection ||= self.table.engine.connection.connection
     end
 
     def init_user_attributes attributes

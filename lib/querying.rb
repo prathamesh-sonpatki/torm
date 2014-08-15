@@ -27,6 +27,16 @@ module Torm
       cm.into table
       cm.insert new_record.current_attribute_values(attributes)
       connection.exec_query cm.to_sql
+      last
+    end
+
+    def last
+      last_id = connection.last_inserted_id(primary_key_sequence)
+      find last_id
+    end
+
+    def primary_key_sequence
+      "#{table_name}_id_seq"
     end
   end
 end

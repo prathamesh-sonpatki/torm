@@ -47,5 +47,25 @@ module Torm
       Post.delete_all
       assert_equal 0, Post.count
     end
+
+    def test_save_returns_the_record_in_ruby_format
+      Post.delete_all
+      post = Post.create subject: "Lol Nom Rom"
+      assert_equal 'Lol Nom Rom', post.reload.subject
+    end
+
+    def test_update_existing_record_using_save
+      Post.delete_all
+      post = Post.create subject: "Lol Nom Rom"
+      post.reload
+      assert_equal 'Lol Nom Rom', post.subject
+      post.subject = 'ZOMG!'
+      post.save
+      assert_equal 'ZOMG!', post.reload.subject
+      assert_equal '', post.reload.author
+      post.author = 'Prathamesh'
+      post.save
+      assert_equal 'Prathamesh', post.reload.author
+    end
   end
 end
