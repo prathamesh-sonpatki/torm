@@ -2,7 +2,7 @@ module Torm
   class Model
     include ModelSchema
     extend Querying
-    extend Crud
+    extend DatabaseStatements
     include Torm::AttributeMethods::Write
     include Torm::AttributeMethods::Read
 

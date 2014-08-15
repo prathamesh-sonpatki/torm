@@ -1,5 +1,5 @@
 module Torm
-  module Crud
+  module DatabaseStatements
     def create attributes
       new_record = new(attributes)
       cm = Arel::InsertManager.new table.engine

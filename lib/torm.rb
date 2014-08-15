@@ -14,7 +14,7 @@ require './lib/attribute_set'
 require './lib/model_schema'
 
 require './lib/querying'
-require './lib/crud'
+require './lib/database_statements'
 require './lib/model'
 require './lib/engine'
 require './lib/base_connection'
