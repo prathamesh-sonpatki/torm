@@ -13,9 +13,6 @@ module Torm
       self
     end
 
-    def self.create(params = {})
-    end
-
     def self.update(params = {})
     end
 
@@ -24,6 +21,18 @@ module Torm
 
     def self.find(id)
       where(id: id)
+    end
+
+    def save(attributes = {})
+      if persisted?
+        _update_record attributes
+      else
+        self.class.create current_attribute_values(attributes)
+      end
+    end
+
+    def persisted?
+      !id.nil?
     end
 
     def self.table
@@ -61,6 +70,13 @@ module Torm
       column_names.each do |column_name|
         init_writer column_name
         init_reader column_name
+      end
+    end
+
+    def current_attribute_values(attributes)
+      self.column_names.map do |column|
+        attr = @attributes[column]
+        [self.class.table[attr.name.intern], attributes.fetch(attr.name.intern, attr.value)]
       end
     end
   end

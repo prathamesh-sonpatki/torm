@@ -21,5 +21,11 @@ module Torm
       self.connection.exec_query dm.to_sql
     end
 
+    def create attributes
+      cm = Arel::InsertManager.new table.engine
+      cm.into table
+      cm.insert attributes
+      connection.exec_query cm.to_sql
+    end
   end
 end
