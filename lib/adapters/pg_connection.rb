@@ -62,6 +62,7 @@ module Torm
       end
 
       def exec_query sql
+        puts sql
         @connection.exec sql
       end
     end
