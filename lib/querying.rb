@@ -26,6 +26,8 @@ module Torm
       find last_id
     end
 
+    private
+
     def primary_key_sequence
       "#{table_name}_id_seq"
     end
