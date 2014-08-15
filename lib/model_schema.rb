@@ -25,7 +25,7 @@ module Torm
 
     def default_attributes
       @default_attributes ||= attributes_builder.build_from_database(
-          self.schema_cache.columns_hash(self.class.table_name))
+          schema_cache.columns_hash(self.class.table_name))
     end
 
   end

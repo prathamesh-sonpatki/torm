@@ -16,9 +16,9 @@ module Torm
     end
 
     def delete_all
-      dm = Arel::DeleteManager.new table.engine
-      dm.from table
-      self.connection.exec_query dm.to_sql
+      delete_manager = Arel::DeleteManager.new table.engine
+      delete_manager.from table
+      self.connection.exec_query delete_manager.to_sql
     end
 
     def last
