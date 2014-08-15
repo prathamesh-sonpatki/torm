@@ -16,38 +16,26 @@ module Torm
 
     def save(attributes = {})
       if persisted?
-        um = Arel::UpdateManager.new self.class.table.engine
-        um.table self.class.table
-        um.set current_attribute_values(attributes)
-        self.class.connection.exec_query um.to_sql
-        self.class.find id
+        update attributes
       else
         self.class.create attributes
       end
     end
 
+    def update(attributes = {})
+      um = Arel::UpdateManager.new self.class.table.engine
+      um.table self.class.table
+      um.set current_attribute_values(attributes)
+      self.class.connection.exec_query um.to_sql
+      self.class.find id
+    end
+
     def reload
-      if persisted?
-        self.class.find id
-      else
-        nil
-      end
+      self.class.find id if persisted?
     end
 
     def persisted?
       !id.nil?
-    end
-
-    def self.table
-      @_table ||= Arel::Table.new(self.name.downcase + 's', Torm::Engine.new)
-    end
-
-    def self.table_name
-      table.name
-    end
-
-    def self.connection
-      @_connection ||= self.table.engine.connection.connection
     end
 
     def init_user_attributes attributes
@@ -81,6 +69,18 @@ module Torm
         attr = @attributes[column]
         [self.class.table[attr.name.intern], user_attributes.fetch(attr.name.intern, attr.value)]
       end
+    end
+
+    def self.table
+      @_table ||= Arel::Table.new(self.name.downcase + 's', Torm::Engine.new)
+    end
+
+    def self.table_name
+      table.name
+    end
+
+    def self.connection
+      @_connection ||= self.table.engine.connection.connection
     end
   end
 end
