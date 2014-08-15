@@ -4,5 +4,19 @@ psql $* <<EOF
 DROP DATABASE IF EXISTS torm_development;
 CREATE DATABASE torm_development;
 \c torm_development;
-CREATE TABLE posts ( id integer primary key, name varchar(20), content text, author varchar(100), subject varchar(1000));
+CREATE TABLE posts
+  (
+    id integer NOT NULL primary key,
+    name varchar(20),
+    content text,
+    author varchar(100),
+    subject varchar(1000)
+  );
+CREATE SEQUENCE posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 EOF
