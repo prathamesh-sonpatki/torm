@@ -14,8 +14,8 @@ module Torm
     end
 
     def test_initialize_allows_setting_attributes
-      post = Post.new subject: "Lol Nom Rom"
-      assert_equal "Lol Nom Rom", post.subject
+      post = Post.new subject: 'How RGenGC works?'
+      assert_equal 'How RGenGC works?', post.subject
     end
 
     def test_initialize_creates_empty_object
@@ -28,58 +28,55 @@ module Torm
 
     def test_create_with_inline_parameters_creates_new_record
       Post.delete_all
-      Post.create subject: "Lol Nom Rom"
+      Post.create subject: 'How RGenGC works?'
       assert_equal 1, Post.count
     end
 
     def test_save_creates_new_record
       Post.delete_all
-      post = Post.new subject: "Lol Nom Rom"
+      post = Post.new subject: 'How RGenGC works?'
       post.save
       assert_equal 1, Post.count
     end
 
     def test_delete_all_creates_sql
       Post.delete_all
-      post = Post.new subject: "Lol Nom Rom"
+      post = Post.new subject: 'How RGenGC works?'
       post.save
       assert_equal 1, Post.count
       Post.delete_all
       assert_equal 0, Post.count
     end
 
-    def test_save_returns_the_record_in_ruby_format
+    def test_create_returns_the_record_with_relational_mapping
       Post.delete_all
-      post = Post.create subject: "Lol Nom Rom"
-      assert_equal 'Lol Nom Rom', post.reload.subject
+      post = Post.create subject: 'How RGenGC works?'
+      assert_equal 'How RGenGC works?', post.reload.subject
     end
 
     def test_update_existing_record_using_save
       Post.delete_all
-      post = Post.create subject: "Lol Nom Rom"
+      post = Post.create subject: 'How RGenGC works?'
       post.reload
-      assert_equal 'Lol Nom Rom', post.subject
-      post.subject = 'ZOMG!'
+      assert_equal 'How RGenGC works', post.subject
+      post.subject = 'How RincGC works?'
       post.save
-      assert_equal 'ZOMG!', post.reload.subject
-      assert_equal '', post.reload.author
-      post.author = 'Prathamesh'
-      post.save
-      assert_equal 'Prathamesh', post.reload.author
+      post.reload
+      assert_equal 'How RincGC works?', post.subject
     end
 
     def test_update_existing_record_using_update
       Post.delete_all
-      post = Post.create subject: "Lol Nom Rom"
+      post = Post.create subject: 'How RGenGC works?'
       post.reload
-      assert_equal 'Lol Nom Rom', post.subject
-      post.update(subject: 'ZOMG!')
-      assert_equal 'ZOMG!', post.reload.subject
+      assert_equal 'How RGenGC works?', post.subject
+      post.update(subject: 'How RincGC works?')
+      assert_equal 'How RincGC works?', post.reload.subject
     end
 
     def test_destroy_deletes_record_with_given_id_if_record_exists
       Post.delete_all
-      post = Post.create subject: "Lol Nom Rom"
+      post = Post.create subject: 'How RGenGC works?'
       Post.destroy post.id
       assert_equal 0, Post.count
     end
