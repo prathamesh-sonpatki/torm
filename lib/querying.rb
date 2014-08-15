@@ -12,7 +12,7 @@ module Torm
 
     def count
       self.connection
-      .exec_query("SELECT COUNT(*) FROM #{self.table_name}")[0][1].to_i
+      .exec_query("SELECT COUNT(*) FROM #{self.table_name}")[0]['count'].to_i
     end
 
     def delete_all
