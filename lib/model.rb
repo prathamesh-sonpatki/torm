@@ -8,6 +8,7 @@ module Torm
     def initialize(user_attributes = {})
       @attributes = self.default_attributes.dup
       init_attribute_methods
+      init_default_values
       init_user_attributes(user_attributes)
       self
     end
@@ -48,6 +49,12 @@ module Torm
 
     def _assign_attribute(k, v)
       public_send("#{k}=", v)
+    end
+
+    def init_default_values
+      column_names.each do |column|
+        _assign_attribute(column, nil)
+      end
     end
 
     def init_attribute_methods
