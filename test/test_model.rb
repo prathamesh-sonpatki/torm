@@ -67,5 +67,12 @@ module Torm
       post.save
       assert_equal 'Prathamesh', post.reload.author
     end
+
+    def test_destroy_deletes_record_with_given_id_if_record_exists
+      Post.delete_all
+      post = Post.create subject: "Lol Nom Rom"
+      Post.destroy post.id
+      assert_equal 0, Post.count
+    end
   end
 end

@@ -21,15 +21,6 @@ module Torm
       self.connection.exec_query dm.to_sql
     end
 
-    def create attributes
-      new_record = new(attributes)
-      cm = Arel::InsertManager.new table.engine
-      cm.into table
-      cm.insert new_record.current_attribute_values(attributes)
-      connection.exec_query cm.to_sql
-      last
-    end
-
     def last
       last_id = connection.last_inserted_id(primary_key_sequence)
       find last_id

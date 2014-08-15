@@ -2,6 +2,7 @@ module Torm
   class Model
     include ModelSchema
     extend Querying
+    extend Crud
     include Torm::AttributeMethods::Write
     include Torm::AttributeMethods::Read
 
@@ -11,13 +12,6 @@ module Torm
       init_default_values
       init_user_attributes(user_attributes)
       self
-    end
-
-    def self.destroy(params)
-    end
-
-    def self.find(id)
-      new(connection.exec_query(where(id: id).project('*').to_sql)[0])
     end
 
     def save(attributes = {})
