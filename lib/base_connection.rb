@@ -20,7 +20,7 @@ module Torm
     end
 
     def connection
-      Torm::Adapters::Pgconnection.new
+      Torm::Adapters::PostgresAdapter.new
     end
   end
 end

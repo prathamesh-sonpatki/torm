@@ -1,1 +1,1 @@
-require './lib/adapters/pg_connection'
+require './lib/adapters/postgres_adapater'
