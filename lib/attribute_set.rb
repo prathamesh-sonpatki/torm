@@ -19,14 +19,6 @@ module Torm
       self[name].value(&block)
     end
 
-    def values_before_type_cast
-      attributes.transform_values(&:value_before_type_cast)
-    end
-
-    def key?(name)
-      attributes.key?(name)
-    end
-
     def write_from_database(name, value)
       attributes[name] = self[name].with_value_from_database(value)
     end

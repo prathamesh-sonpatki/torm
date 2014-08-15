@@ -1,1 +1,1 @@
-require_relative 'postgres_adapater'
+require_relative 'postgres_adapter'

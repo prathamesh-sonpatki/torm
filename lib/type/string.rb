@@ -1,6 +1,7 @@
 module Torm
   module Type
     class String < Value
+
       def type
         :string
       end
