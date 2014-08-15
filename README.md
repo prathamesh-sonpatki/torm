@@ -22,3 +22,36 @@ Now run tests:
 ```
 bundle exec rake test
 ```
+
+## What can it do?
+
+Check the model tests, to find complete list of operations. 
+
+## Usage
+
+```ruby
+class Post < Torm::Model
+end
+
+post = Post.new subject: 'What is RGenCG?'
+post.save
+
+first_post = Post.find(1)
+puts first_post.subject
+=> 'What is RGenCG?'
+
+first_post.subject = 'What is RincCG?'
+first_post.save
+puts Post.find(1).subject
+=> 'What is RincCG?'
+  
+Post.where(id: 1).subject
+=> 'What is RincCG?'
+   
+Post.count
+=> 1
+
+Post.delete_all
+Post.count
+=> 0
+```
