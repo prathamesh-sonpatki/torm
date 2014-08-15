@@ -69,7 +69,7 @@ module Torm
     end
 
     def self.connection
-      @_model_connection ||= model_engine.connection.connection
+      @_model_connection ||= model_engine.connection
     end
   end
 end
