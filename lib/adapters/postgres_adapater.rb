@@ -1,7 +1,7 @@
 module Torm
   module Adapters
     class PostgresAdapter
-      def initialize(options = {})
+      def initialize
         @connection = PG.connect(:dbname => 'torm_development')
       end
 
@@ -10,7 +10,7 @@ module Torm
       end
 
       def schema_cache
-        Torm::SchemaCache.new self
+        @_schema_cache ||= Torm::SchemaCache.new self
       end
 
       def quote_table_name arg
@@ -23,6 +23,16 @@ module Torm
 
       def quote value, column = nil
         "'#{value.to_s}'"
+      end
+
+      def table_exists? name
+        exec_query(<<-SQL).first[0].to_i > 0
+              SELECT COUNT(*)
+              FROM pg_class c
+              LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+              WHERE c.relkind IN ('r','v','m') -- (r)elation/table, (v)iew, (m)aterialized view
+              AND c.relname = '#{name}'
+        SQL
       end
 
       def columns table

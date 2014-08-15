@@ -1,1 +1,1 @@
-require './lib/adapters/postgres_adapater'
+require_relative 'postgres_adapater'

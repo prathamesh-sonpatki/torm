@@ -20,7 +20,7 @@ module Torm
     end
 
     def connection
-      Torm::Adapters::PostgresAdapter.new
+      @_adapter ||= Torm::Adapters::PostgresAdapter.new
     end
   end
 end
