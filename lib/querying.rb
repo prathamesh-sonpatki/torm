@@ -7,7 +7,7 @@ module Torm
       options.each do |field, value|
         clause = clause.and(table[field].eq(value))
       end
-      table.where(clause)
+      connection.exec_query table.where(clause).project('*').to_sql
     end
 
     def count
