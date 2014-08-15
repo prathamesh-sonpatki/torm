@@ -17,7 +17,10 @@ module Torm
     end
 
     def find(id)
-      new(connection.exec_query(where(id: id).project('*').to_sql)[0])
+      find_clause = where(id: id)
+      find_clause = find_clause.project('*')
+      result_hash = connection.exec_query(find_clause.to_sql)[0]
+      new(result_hash)
     end
   end
 end
