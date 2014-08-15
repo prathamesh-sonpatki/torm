@@ -1,0 +1,8 @@
+#!/bin/sh -xe
+
+psql $* <<EOF
+DROP DATABASE IF EXISTS torm_development;
+CREATE DATABASE torm_development;
+\c torm_development;
+CREATE TABLE posts ( id integer primary key, name varchar(20), content text, author varchar(100), subject varchar(1000));
+EOF
