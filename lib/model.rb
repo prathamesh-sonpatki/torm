@@ -27,7 +27,7 @@ module Torm
       if persisted?
         _update_record attributes
       else
-        self.class.create current_attribute_values(attributes)
+        self.class.create attributes
       end
     end
 

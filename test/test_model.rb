@@ -26,6 +26,12 @@ module Torm
       assert_equal nil, post.subject
     end
 
+    def test_create_with_inline_parameters_creates_new_record
+      Post.delete_all
+      Post.create subject: "Lol Nom Rom"
+      assert_equal 1, Post.count
+    end
+
     def test_save_creates_new_record
       Post.delete_all
       post = Post.new subject: "Lol Nom Rom"

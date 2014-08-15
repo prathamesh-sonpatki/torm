@@ -7,7 +7,7 @@ module Torm
       options.each do |field, value|
         clause = clause.and(table[field].eq(value))
       end
-      connection.exec_query table.where(clause).project('*').to_sql
+      table.where(clause)
     end
 
     def count
@@ -22,9 +22,10 @@ module Torm
     end
 
     def create attributes
+      new_record = new(attributes)
       cm = Arel::InsertManager.new table.engine
       cm.into table
-      cm.insert attributes
+      cm.insert new_record.current_attribute_values(attributes)
       connection.exec_query cm.to_sql
     end
   end
