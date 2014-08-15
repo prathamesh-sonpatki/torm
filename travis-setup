@@ -11,7 +11,8 @@ CREATE TABLE posts
     content text,
     author varchar(100),
     subject varchar(1000)
-  );
+  )
+;
 CREATE SEQUENCE posts_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -19,4 +20,5 @@ CREATE SEQUENCE posts_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
+ALTER TABLE posts ALTER id SET DEFAULT NEXTVAL('posts_id_seq');
 EOF

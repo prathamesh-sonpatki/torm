@@ -74,7 +74,7 @@ module Torm
     end
 
     def current_attribute_values(user_attributes = {})
-      self.column_names.map do |column|
+      (self.column_names - ['id']).map do |column|
         attr = @attributes[column]
         [self.class.table[attr.name.intern], user_attributes.fetch(attr.name.intern, attr.value)]
       end
