@@ -1,10 +1,8 @@
 require 'arel'
 require 'pg'
 require './lib/convenience/ext/hash'
-require "./lib/type/value"
-require "./lib/type/integer"
-require  "./lib/type/string"
-require "./lib/type/type_map"
+
+require 'type/type'
 
 require './lib/attribute'
 require './lib/attribute_methods/read'
