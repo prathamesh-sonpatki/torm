@@ -18,6 +18,14 @@ module Torm
       assert_equal "Lol Nom Rom", post.subject
     end
 
+    def test_initialize_creates_empty_object
+      post = Post.new
+      assert_equal nil, post.id
+      assert_equal nil, post.name
+      assert_equal nil, post.author
+      assert_equal nil, post.subject
+    end
+
     def test_save_creates_new_record
       Post.delete_all
       post = Post.new subject: "Lol Nom Rom"
