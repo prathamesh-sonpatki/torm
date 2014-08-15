@@ -68,6 +68,15 @@ module Torm
       assert_equal 'Prathamesh', post.reload.author
     end
 
+    def test_update_existing_record_using_update
+      Post.delete_all
+      post = Post.create subject: "Lol Nom Rom"
+      post.reload
+      assert_equal 'Lol Nom Rom', post.subject
+      post.update(subject: 'ZOMG!')
+      assert_equal 'ZOMG!', post.reload.subject
+    end
+
     def test_destroy_deletes_record_with_given_id_if_record_exists
       Post.delete_all
       post = Post.create subject: "Lol Nom Rom"
