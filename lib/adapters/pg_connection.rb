@@ -9,10 +9,6 @@ module Torm
         @visitor = Arel::Visitors::PostgreSQL.new self
       end
 
-      def schema_cache
-        Torm::SchemaCache.new self
-      end
-
       def quote_table_name arg
         arg
       end
