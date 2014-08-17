@@ -25,8 +25,8 @@ module Torm
         "'#{value.to_s}'"
       end
 
-      def columns
-        column_definitions('posts').values.map do |column|
+      def columns table
+        column_definitions(table).values.map do |column|
           Torm::Column.new(column[0], column[1])
         end
       end
