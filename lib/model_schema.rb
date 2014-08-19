@@ -28,5 +28,18 @@ module Torm
           schema_cache.columns_hash(self.class.table_name))
     end
 
+    module ClassMethods
+      def table
+        @_table ||= Arel::Table.new(self.name.downcase + 's', model_engine)
+      end
+
+      def model_engine
+        @_model_engine ||= Torm::Engine.new
+      end
+
+      def connection
+        @_model_connection ||= model_engine.connection
+      end
+    end
   end
 end
