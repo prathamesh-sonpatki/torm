@@ -1,15 +1,6 @@
 module Torm
   module ModelSchema
 
-    # Convenience instance accessors
-    def schema_cache
-      self.class.connection.schema_cache
-    end
-
-    def table_name
-      self.class.table_name
-    end
-
     def column_names
       @column_names ||= schema_cache.columns(table_name).map { |column| column.name }
     end
@@ -31,6 +22,15 @@ module Torm
     def default_attributes
       @default_attributes ||= attributes_builder.build_from_database(
           schema_cache.columns_hash(table_name))
+    end
+
+    # Convenience instance accessors
+    def schema_cache
+      self.class.connection.schema_cache
+    end
+
+    def table_name
+      self.class.table_name
     end
 
     module ClassMethods
