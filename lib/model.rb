@@ -1,6 +1,7 @@
 module Torm
   class Model
     include ModelSchema
+    extend Naming
     extend Querying
     extend DatabaseStatements
     include DatabaseStatements
@@ -64,9 +65,6 @@ module Torm
       @_model_engine ||= Torm::Engine.new
     end
 
-    def self.table_name
-      table.name
-    end
 
     def self.connection
       @_model_connection ||= model_engine.connection
