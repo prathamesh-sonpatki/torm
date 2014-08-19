@@ -52,7 +52,7 @@ module Torm
                       ON a.attrelid = d.adrelid AND a.attnum = d.adnum
                       WHERE a.attrelid = '#{name}'::regclass
                       AND a.attnum > 0 AND NOT a.attisdropped
-                      ORDER BY a.attnum)
+                      ORDER BY a.attnum) , false
       end
 
       def type_map
