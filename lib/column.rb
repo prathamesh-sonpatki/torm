@@ -1,6 +1,3 @@
-# name
-# sql_type
-# cast_type
 module Torm
   class Column
     attr_accessor :name, :sql_type, :cast_type
