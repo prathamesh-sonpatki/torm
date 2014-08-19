@@ -22,6 +22,9 @@ module Torm
       end
 
       def quote value, column = nil
+        if column
+          value = column.cast_type.type_cast_for_database(value)
+        end
         "'#{value.to_s}'"
       end
 
@@ -43,13 +46,13 @@ module Torm
       end
 
       def column_definitions(name)
-        @connection.exec(%Q(SELECT a.attname, format_type(a.atttypid, a.atttypmod),
-                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
-                FROM pg_attribute a LEFT JOIN pg_attrdef d
-                  ON a.attrelid = d.adrelid AND a.attnum = d.adnum
-                  WHERE a.attrelid = '#{name}'::regclass
-                 AND a.attnum > 0 AND NOT a.attisdropped
-               ORDER BY a.attnum))
+        exec_query %Q(SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+                      pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+                      FROM pg_attribute a LEFT JOIN pg_attrdef d
+                      ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+                      WHERE a.attrelid = '#{name}'::regclass
+                      AND a.attnum > 0 AND NOT a.attisdropped
+                      ORDER BY a.attnum)
       end
 
       def type_map
@@ -75,8 +78,8 @@ module Torm
         exec_query("SELECT currval('#{sequence_name}')").values.first.first
       end
 
-      def exec_query sql
-        puts sql
+      def exec_query sql, log = true
+        puts sql if log
         @connection.exec sql
       end
     end
