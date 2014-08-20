@@ -11,14 +11,13 @@ module Torm
     end
 
     def count
-      self.connection
-      .exec_query("SELECT COUNT(*) FROM #{self.table_name}")[0]['count'].to_i
+      connection.exec_query("SELECT COUNT(*) FROM #{self.table_name}")[0]['count'].to_i
     end
 
     def delete_all
       delete_manager = Arel::DeleteManager.new table.engine
       delete_manager.from table
-      self.connection.exec_query delete_manager.to_sql
+      connection.exec_query delete_manager.to_sql
     end
 
     def last

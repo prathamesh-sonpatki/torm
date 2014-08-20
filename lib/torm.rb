@@ -11,6 +11,7 @@ require 'builder'
 require 'attribute_set'
 require 'model_schema'
 
+require 'naming'
 require 'querying'
 require 'database_statements'
 require 'model'
