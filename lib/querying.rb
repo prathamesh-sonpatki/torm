@@ -20,11 +20,6 @@ module Torm
       connection.exec_query delete_manager.to_sql
     end
 
-    def last
-      last_id = connection.last_inserted_id(primary_key_sequence)
-      find last_id
-    end
-
     private
 
     def primary_key_sequence

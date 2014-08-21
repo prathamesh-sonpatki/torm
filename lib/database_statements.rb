@@ -33,6 +33,11 @@ module Torm
       self.connection.exec_query delete_manager.to_sql
     end
 
+    def last
+      last_id = connection.last_inserted_id(primary_key_sequence)
+      find last_id
+    end
+
     def find(id)
       find_clause = where(id: id)
       find_clause = find_clause.project('*')
