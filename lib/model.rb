@@ -1,5 +1,4 @@
 class Model
-
   def self.create(params = {})
   end
 
