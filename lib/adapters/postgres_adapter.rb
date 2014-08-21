@@ -2,7 +2,7 @@ module Torm
   module Adapters
     class Pgconnection
       def initialize(options = {})
-        @connection = PG.connect(:dbname => 'demo')
+        @connection = PG.connect(:dbname => 'torm_development')
       end
 
       def visitor
