@@ -68,10 +68,12 @@ module Torm
     def test_update_existing_record_using_update
       Post.delete_all
       post = Post.create subject: 'How RGenGC works?'
+      post2 = Post.create subject: 'How RGenGC works? ZOMG!!'
       post.reload
       assert_equal 'How RGenGC works?', post.subject
       post.update(subject: 'How RincGC works?')
       assert_equal 'How RincGC works?', post.reload.subject
+      assert_equal 'How RGenGC works? ZOMG!!', post2.reload.subject
     end
 
     def test_destroy_deletes_record_with_given_id_if_record_exists
