@@ -33,7 +33,7 @@ module Torm
     end
 
     def self.connection
-      self.table.engine.connection.connection
+      self.table.engine.connection
     end
 
     def init_user_attributes attributes
