@@ -1,7 +1,7 @@
 module Torm
   module DatabaseStatements
 
-    def save(attributes = {})
+    def save attributes = {}
       if persisted?
         update attributes
       else
@@ -9,7 +9,7 @@ module Torm
       end
     end
 
-    def create attributes
+    def create attributes = {}
       new_record = new(attributes)
       insert_manager = Arel::InsertManager.new table.engine
       insert_manager.into table
@@ -18,7 +18,7 @@ module Torm
       last
     end
 
-    def update(attributes = {})
+    def update attributes = {}
       update_manager = Arel::UpdateManager.new self.class.table.engine
       update_manager.table self.class.table
       update_manager.where self.class.table[:id].eq id
@@ -39,7 +39,7 @@ module Torm
       find last_id
     end
 
-    def find(id)
+    def find id
       find_clause = where(id: id)
       find_clause = find_clause.project('*')
       result_hash = connection.exec_query(find_clause.to_sql)[0]
