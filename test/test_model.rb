@@ -13,13 +13,13 @@ module Torm
     end
 
     def test_initialize_allows_setting_attributes
-      post = Post.new subject: "Lol Nom Rom"
-      assert_equal "Lol Nom Rom", post.name
+      post = Post.new name: "What is RGenGC?"
+      assert_equal "What is RGenGC?", post.name
     end
 
     def test_save_creates_new_record
       Post.delete_all
-      post = Post.new subject: "Lol Nom Rom"
+      post = Post.new subject: "What is RGenGC?"
       post.save
       assert_equal 1, Post.count
     end
