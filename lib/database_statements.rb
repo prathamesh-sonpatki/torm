@@ -21,6 +21,7 @@ module Torm
     def update(attributes = {})
       update_manager = Arel::UpdateManager.new self.class.table.engine
       update_manager.table self.class.table
+      update_manager.where self.class.table[:id].eq id
       update_manager.set current_attribute_values(attributes)
       self.class.connection.exec_query update_manager.to_sql
       self.class.find id
