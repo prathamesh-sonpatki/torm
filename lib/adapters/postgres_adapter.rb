@@ -1,6 +1,6 @@
 module Torm
   module Adapters
-    class Pgconnection
+    class PostgresAdapter
       def initialize(options = {})
         @connection = PG.connect(:dbname => 'torm_development')
       end
