@@ -2,13 +2,9 @@ module Torm
   class Model
     include ModelSchema
     extend Querying
-    include Torm::AttributeMethods::Write
-    include Torm::AttributeMethods::Read
 
     def initialize(attributes = nil)
       @attributes = self.default_attributes.dup
-      init_attribute_methods
-      init_user_attributes(attributes)
     end
 
     def self.create(params = {})
@@ -33,7 +29,7 @@ module Torm
     end
 
     def self.connection
-      self.table.engine.connection.connection
+      self.table.engine.connection
     end
 
     def init_user_attributes attributes
