@@ -7,6 +7,13 @@ module Torm
       assert_equal "SELECT FROM posts  WHERE posts.id = 1", Post.where(id: 1).to_sql
     end
 
+    def test_accepts_where_clause_with_multiple_fields
+      assert_equal(
+        "SELECT FROM posts  WHERE posts.id = 1 AND posts.author = 'Foobar'",
+        Post.where(id: 1, author: 'Foobar').to_sql
+      )
+    end
+
     def test_creates_appropriate_arel_table
       table = Post.table
       assert_instance_of Arel::Table, table
