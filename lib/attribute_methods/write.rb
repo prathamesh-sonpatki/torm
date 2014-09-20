@@ -2,11 +2,9 @@ module Torm
   module AttributeMethods
     module Write
       def init_writer(attr_name)
-        self.singleton_class.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def #{attr_name}=(value)
-            write_attribute('#{attr_name}', value)
-          end
-        RUBY
+        self.singleton_class.define_method("#{attr_name}=") do |value|
+          write_attribute(attr_name, value)
+        end
       end
 
       def write_attribute(name, value)
