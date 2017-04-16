@@ -2,11 +2,9 @@ module Torm
   module AttributeMethods
     module Read
       def init_reader(attr_name)
-        self.singleton_class.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def #{attr_name}
-            read_attribute('#{attr_name}')
-          end
-        RUBY
+        self.singleton_class.define_method(attr_name) do
+          read_attribute(attr_name)
+        end
       end
 
       def read_attribute(attr_name)
